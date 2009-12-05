@@ -1,9 +1,11 @@
 #include "Object.hpp"
 
-Object::Object(const sf::Utf8& name)
+sf::Uint32 Object::myNextId = 0;
+
+Object::Object(const sf::String& name)
     :   myName(name)
 {
-
+    myId = myNextId++;
 }
 
 Object::~Object()
@@ -11,9 +13,19 @@ Object::~Object()
     //dtor
 }
 
-const sf::Utf8& Object::GetName() const
+void    Object::SetName(const sf::String& name)
+{
+    myName = name;
+}
+
+const sf::String& Object::GetName() const
 {
     return myName;
+}
+
+const sf::Uint32&   Object::GetId() const
+{
+    return myId;
 }
 
 void    Object::Update(const sf::Event& event)
