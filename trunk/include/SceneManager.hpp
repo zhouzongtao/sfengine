@@ -10,6 +10,7 @@ class SceneManager : public Singleton<SceneManager>
 {
     public:
         friend SceneManager*    Singleton<SceneManager>::Get();
+        friend void             Singleton<SceneManager>::Kill();
 
         bool                    AddScene(Scene* scene);
         void                    RemoveScene(Scene* scene);

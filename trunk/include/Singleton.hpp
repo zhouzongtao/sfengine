@@ -13,6 +13,12 @@ class Singleton
             return myInstance;
         }
 
+        static void Kill()
+        {
+            delete myInstance;
+            myInstance = 0;
+        }
+
     protected:
         Singleton() {}
         virtual ~Singleton() {}

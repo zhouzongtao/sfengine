@@ -9,6 +9,7 @@ class WindowManager : public sf::RenderWindow, public Singleton<WindowManager>
 {
     public:
         friend WindowManager*   Singleton<WindowManager>::Get();
+        friend void             Singleton<WindowManager>::Kill();
 
     protected:
         WindowManager();

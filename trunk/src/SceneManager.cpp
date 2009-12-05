@@ -1,18 +1,19 @@
 #include "SceneManager.hpp"
 
 #include "WindowManager.hpp"
+#include "UIManager.hpp"
 
 template<>
 SceneManager*  Singleton<SceneManager>::myInstance = 0;
 
 SceneManager::SceneManager()
 {
-    //ctor
+    AddScene(UIManager::Get());
 }
 
 SceneManager::~SceneManager()
 {
-    //dtor
+    UIManager::Kill();
 }
 
 bool    SceneManager::AddScene(Scene* scene)

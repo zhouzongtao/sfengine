@@ -17,7 +17,6 @@ class Object : public sf::Drawable
 
         const sf::Uint32&   GetId() const;
 
-        //virtual void    Render(sf::RenderTarget& target, sf::RenderQueue& queue) const;
         virtual void        Update(const sf::Event& event);
 //        virtual void    ReceiveMessage(Message& message);
 
