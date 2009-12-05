@@ -1,5 +1,7 @@
 #include "Scene.hpp"
 
+#include <SFML/Graphics/RenderTarget.hpp>
+
 Scene::Scene(const sf::String& name)
     :   myName(name)
 {
@@ -54,4 +56,28 @@ Objects    Scene::GetObjectsByName(const sf::String& name)
             list[obj->GetId()] = obj;
     }
     return list;
+}
+
+void    Scene::Update(const sf::Event& event)
+{
+    for (Objects::const_iterator it = myObjects.begin(); it != myObjects.end(); ++it)
+    {
+        Object* object = it->second;
+
+        if (object)
+            if (object->IsEnabled())
+                object->Update(event);
+    }
+}
+
+void    Scene::Render(sf::RenderTarget& target, sf::RenderQueue& queue) const
+{
+    for (Objects::const_iterator it = myObjects.begin(); it != myObjects.end(); ++it)
+    {
+        Object* object = it->second;
+
+        if (object)
+            if (object->IsVisible())
+                target.Draw(*object);
+    }
 }

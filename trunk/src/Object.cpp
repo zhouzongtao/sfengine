@@ -32,3 +32,23 @@ void    Object::Update(const sf::Event& event)
 {
 
 }
+
+void    Object::SetEnabled(bool enabled)
+{
+    myEnabled = enabled;
+}
+
+bool    Object::IsEnabled() const
+{
+    return myEnabled;
+}
+
+void    Object::SetVisible(bool visible)
+{
+    myVisible = visible;
+}
+
+bool    Object::IsVisible() const
+{
+    return myVisible;
+}

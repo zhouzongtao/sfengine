@@ -20,6 +20,9 @@ class Scene : public sf::Drawable
         const Objects&  GetObjects() const;
         Objects         GetObjectsByName(const sf::String& name);
 
+        virtual void    Update(const sf::Event& event);
+        virtual void    Render(sf::RenderTarget& target, sf::RenderQueue& queue) const;
+
     private:
         sf::String      myName;
         Objects         myObjects;

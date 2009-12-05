@@ -21,12 +21,21 @@ class Object : public sf::Drawable
         virtual void        Update(const sf::Event& event);
 //        virtual void    ReceiveMessage(Message& message);
 
+        void                SetEnabled(bool enabled = true);
+        bool                IsEnabled() const;
+
+        void                SetVisible(bool visible = true);
+        bool                IsVisible() const;
+
     protected:
 
 
     private:
         sf::String          myName;
         sf::Uint32          myId;
+
+        bool                myEnabled;
+        bool                myVisible;
 
         static sf::Uint32   myNextId;
 };
