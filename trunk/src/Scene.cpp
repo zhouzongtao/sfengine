@@ -13,6 +13,11 @@ Scene::~Scene()
     //dtor
 }
 
+const sf::String&   Scene::GetName() const
+{
+    return myName;
+}
+
 bool        Scene::AddObject(Object* object)
 {
     if (!object)

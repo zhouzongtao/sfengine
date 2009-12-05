@@ -12,16 +12,18 @@ class Scene : public sf::Drawable
         Scene(const sf::String& name);
         virtual ~Scene();
 
-        bool            AddObject(Object *object);
+        const sf::String&   GetName() const;
 
-        void            RemoveObject(Object* object);
-        void            RemoveObjectsByName(const sf::String& name);
+        bool                AddObject(Object *object);
 
-        const Objects&  GetObjects() const;
-        Objects         GetObjectsByName(const sf::String& name);
+        void                RemoveObject(Object* object);
+        void                RemoveObjectsByName(const sf::String& name);
 
-        virtual void    Update(const sf::Event& event);
-        virtual void    Render(sf::RenderTarget& target, sf::RenderQueue& queue) const;
+        const Objects&      GetObjects() const;
+        Objects             GetObjectsByName(const sf::String& name);
+
+        virtual void        Update(const sf::Event& event);
+        virtual void        Render(sf::RenderTarget& target, sf::RenderQueue& queue) const;
 
     private:
         sf::String      myName;

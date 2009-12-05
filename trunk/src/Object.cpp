@@ -3,7 +3,10 @@
 sf::Uint32 Object::myNextId = 0;
 
 Object::Object(const sf::String& name)
-    :   myName(name)
+    :   myName(name),
+        myEnabled(true),
+        myVisible(true)
+
 {
     myId = myNextId++;
 }
