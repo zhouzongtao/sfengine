@@ -1,6 +1,8 @@
 #include "Widget.hpp"
 
 #include <SFML/Graphics/RenderTarget.hpp>
+#include "UIManager.hpp"
+#include "Utils.hpp"
 
 Widget::Widget()
     :   Object("Widget")
@@ -48,4 +50,22 @@ void    Widget::SetSize(float width, float height)
 const sf::Vector2f& Widget::GetSize() const
 {
     return mySize;
+}
+
+void    Widget::LoadStyle(const sf::String& style)
+{
+    LoadStyle(UIManager::Get()->GetStyle(style));
+}
+
+void    Widget::LoadStyle(Style& style)
+{
+    Utils* utils = Utils::Get();
+
+    SetColor(utils->GetColorFromString(style["backgroundColor"], GetColor()));
+    SetEnabled(utils->GetBooleanFromString(style["enabled"], IsEnabled()));
+    SetVisible(utils->GetBooleanFromString(style["visible"], IsVisible()));
+
+    if (style["size"] != "")
+        SetSize(utils->GetVectorFromString(style["size"], GetSize()));
+
 }
