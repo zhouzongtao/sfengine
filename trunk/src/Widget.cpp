@@ -5,7 +5,10 @@
 #include "Utils.hpp"
 
 Widget::Widget()
-    :   Object("Widget")
+    :   Object("Widget"),
+        myParent(0),
+        mySize(sf::Vector2f(20, 20)),
+        myFocusable(true)
 {
     //ctor
 }
@@ -36,6 +39,41 @@ void    Widget::Render(sf::RenderTarget& target, sf::RenderQueue& queue) const
     }
 }
 
+void    Widget::SetParent(Widget* parent)
+{
+    myParent = parent;
+}
+
+Widget* Widget::GetParent() const
+{
+    return myParent;
+}
+
+void    Widget::Add(Widget* widget)
+{
+    if (!widget)
+        return;
+
+    for (Widgets::const_iterator it = myChildren.begin(); it != myChildren.end(); ++it)
+        if (*it == widget)
+            return;
+    myChildren.push_back(widget);
+    widget->SetParent(this);
+}
+
+void    Widget::Remove(Widget* widget)
+{
+    if (!widget)
+        return;
+
+    for (Widgets::iterator it = myChildren.begin(); it != myChildren.end(); ++it)
+        if (*it == widget)
+        {
+            myChildren.erase(it);
+            return;
+        }
+}
+
 void    Widget::SetSize(const sf::Vector2f& size)
 {
     mySize = size;
@@ -50,6 +88,16 @@ void    Widget::SetSize(float width, float height)
 const sf::Vector2f& Widget::GetSize() const
 {
     return mySize;
+}
+
+void    Widget::SetFocusable(bool focusable)
+{
+    myFocusable = focusable;
+}
+
+bool    Widget::IsFocusable() const
+{
+    return myFocusable;
 }
 
 void    Widget::LoadStyle(const sf::String& style)
@@ -67,5 +115,8 @@ void    Widget::LoadStyle(Style& style)
 
     if (style["size"] != "")
         SetSize(utils->GetVectorFromString(style["size"], GetSize()));
+
+    if (style["position"] != "")
+        SetPosition(utils->GetVectorFromString(style["position"], GetPosition()));
 
 }

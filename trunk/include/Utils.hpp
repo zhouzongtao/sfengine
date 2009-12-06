@@ -4,7 +4,6 @@
 #include "Singleton.hpp"
 #include <sstream>
 
-#include <SFML/System/String.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Graphics/Color.hpp>
 
@@ -15,12 +14,12 @@ class Utils : public Singleton<Utils>
         friend void     Singleton<Utils>::Kill();
 
 
-        sf::Color       GetColorFromString(const sf::String& colorStr, const sf::Color& defaultValue);
-        bool            GetBooleanFromString(const sf::String& boolStr, bool defaultValue);
-        sf::Vector2f    GetVectorFromString(const sf::String& boolStr, const sf::Vector2f& defaultValue);
+        sf::Color       GetColorFromString(const std::string& colorStr, const sf::Color& defaultValue);
+        bool            GetBooleanFromString(const std::string& boolStr, bool defaultValue);
+        sf::Vector2f    GetVectorFromString(const std::string& boolStr, const sf::Vector2f& defaultValue);
 
         template<typename T>
-        T   GetFromString(const sf::String& value, const T& defaultValue)
+        T   GetFromString(const std::string& value, const T& defaultValue)
         {
             T valueBack;
             std::istringstream iss(value);
@@ -31,7 +30,7 @@ class Utils : public Singleton<Utils>
         }
 
         template<typename T>
-        sf::String  ToString(const T& value)
+        std::string ToString(const T& value)
         {
             std::ostringstream oss;
             oss << value;

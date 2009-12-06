@@ -16,9 +16,18 @@ class Widget : public Object
         Widget();
         virtual ~Widget();
 
+        void                SetParent(Widget* parent);
+        Widget*             GetParent() const;
+
+        void                Add(Widget* widget);
+        void                Remove(Widget* widget);
+
         void                SetSize(const sf::Vector2f& size);
         void                SetSize(float width, float height);
         const sf::Vector2f& GetSize() const;
+
+        void                SetFocusable(bool focusable = true);
+        bool                IsFocusable() const;
 
         void                LoadStyle(const sf::String& styleName);
         void                LoadStyle(Style& style);
@@ -28,7 +37,10 @@ class Widget : public Object
 
     private:
         Widgets             myChildren;
+        Widget*             myParent;
+
         sf::Vector2f        mySize;
+        bool                myFocusable;
 };
 
 #endif // WIDGET_HPP
