@@ -1,4 +1,4 @@
-#include "Scene.hpp"
+#include <Engine/Scene.hpp>
 
 #include <SFML/Graphics/RenderTarget.hpp>
 

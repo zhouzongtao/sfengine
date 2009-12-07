@@ -1,8 +1,12 @@
-#include "Widget.hpp"
+
+#include <Engine/Widget.hpp>
+#include <Engine/UIManager.hpp>
+#include <Engine/Utils.hpp>
 
 #include <SFML/Graphics/RenderTarget.hpp>
-#include "UIManager.hpp"
-#include "Utils.hpp"
+
+Widget* Widget::myFocusedWidget = 0;
+Widget* Widget::myHoveredWidget = 0;
 
 Widget::Widget()
     :   Object("Widget"),
@@ -20,6 +24,7 @@ Widget::~Widget()
 
 void    Widget::Render(sf::RenderTarget& target, sf::RenderQueue& queue) const
 {
+    queue.SetColor(GetColor());
     queue.SetTexture(0);
 
     queue.BeginBatch();
@@ -49,6 +54,11 @@ Widget* Widget::GetParent() const
     return myParent;
 }
 
+const Widgets&  Widget::GetChildren() const
+{
+    return myChildren;
+}
+
 void    Widget::Add(Widget* widget)
 {
     if (!widget)
@@ -57,6 +67,7 @@ void    Widget::Add(Widget* widget)
     for (Widgets::const_iterator it = myChildren.begin(); it != myChildren.end(); ++it)
         if (*it == widget)
             return;
+
     myChildren.push_back(widget);
     widget->SetParent(this);
 }
@@ -90,6 +101,22 @@ const sf::Vector2f& Widget::GetSize() const
     return mySize;
 }
 
+sf::Vector2f    Widget::GetAbsolutePosition() const
+{
+    sf::Vector2f absPos = GetPosition();
+    Widget* p = GetParent();
+
+    while (p)
+    {
+        const sf::Vector2f& pos = p->GetPosition();
+        absPos.x += pos.x;
+        absPos.y += pos.y;
+
+        p = p->GetParent();
+    }
+    return absPos;
+}
+
 void    Widget::SetFocusable(bool focusable)
 {
     myFocusable = focusable;
@@ -98,6 +125,16 @@ void    Widget::SetFocusable(bool focusable)
 bool    Widget::IsFocusable() const
 {
     return myFocusable;
+}
+
+bool    Widget::IsFocused() const
+{
+    return (myFocusedWidget == this);
+}
+
+bool    Widget::IsHovered() const
+{
+    return (myHoveredWidget == this);
 }
 
 void    Widget::LoadStyle(const sf::String& style)

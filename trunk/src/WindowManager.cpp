@@ -1,4 +1,4 @@
-#include "WindowManager.hpp"
+#include <Engine/WindowManager.hpp>
 
 template<>
 WindowManager*  Singleton<WindowManager>::myInstance = 0;

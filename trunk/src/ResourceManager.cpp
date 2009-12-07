@@ -1,4 +1,4 @@
-#include "ResourceManager.hpp"
+#include <Engine/ResourceManager.hpp>
 
 template<>
 ResourceManager*    Singleton<ResourceManager>::myInstance = 0;

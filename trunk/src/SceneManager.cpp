@@ -1,14 +1,14 @@
-#include "SceneManager.hpp"
+#include <Engine/SceneManager.hpp>
 
-#include "WindowManager.hpp"
-#include "UIManager.hpp"
+#include <Engine/WindowManager.hpp>
+#include <Engine/UIManager.hpp>
 
 template<>
 SceneManager*  Singleton<SceneManager>::myInstance = 0;
 
 SceneManager::SceneManager()
 {
-    AddScene(UIManager::Get());
+    UIManager::Get();
 }
 
 SceneManager::~SceneManager()
@@ -39,13 +39,19 @@ void    SceneManager::Update(const sf::Event& event)
         Scene *scene = it->second;
         scene->Update(event);
     }
+
+    UIManager::Get()->Update(event);
 }
 
 void    SceneManager::Display()
 {
+    // Draws the scenes
     for (Scenes::const_iterator it = myScenes.begin(); it != myScenes.end(); ++it)
     {
         Scene *scene = it->second;
         WindowManager::Get()->Draw(*scene);
     }
+
+    // Draws the user interface
+    WindowManager::Get()->Draw(*UIManager::Get());
 }
