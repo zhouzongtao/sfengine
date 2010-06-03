@@ -27,6 +27,15 @@ scene:OnEvent(
     end
 )
 }}}
+
+== [http://code.google.com/p/sfengine/source/browse/trunk/include/Icon.hpp Icon] ==
+
+Icon is a base class for drawing an image on screen.
+{{{
+local icon = Icon(ResourceManager.Get():GetImage("data/icon.png"))
+icon:SetSize(100, 100)
+}}}
+
 == [http://code.google.com/p/sfengine/source/browse/trunk/include/AnimatedObject.hpp AnimatedObject] ==
 
 This class inherits from Object and play an Animation on screen.
