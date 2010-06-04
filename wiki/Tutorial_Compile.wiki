@@ -1,0 +1,38 @@
+#summary Tutorial about sfengine library compilation
+#labels Featured,Phase-Deploy
+
+= Compilation =
+
+sfengine use CMake cross-plateform open-source build system.
+
+First, [http://code.google.com/p/sfengine/source/checkout check-out the svn repository] to download source.
+
+== Windows ==
+
+  * [http://www.cmake.org/cmake/resources/software.html Download CMake Win32 installer] and install
+  * Launch cmake-gui. In the "Where is the source code" box, type the sfengine root directory.
+  * CMake have to find Boost and SFML dependencies. It uses macros to define paths :
+     * SFML_INCLUDEDIR / SFML_LIBRARYDIR
+     * BOOST_INCLUDEDIR / BOOST_LIBRARYDIR
+    You can define them with "Add entry" button.
+  * Press Configure button and choose your target compiler.
+  * You now just have to go to the build directory and open your solution or project and compile it !
+
+== Unix ==
+
+  * Download CMake using
+{{{
+sudo apt-get install cmake
+}}}
+  or using [http://www.cmake.org/cmake/resources/software.html this link]
+  * Create an empty build directory (like sfengineBuild/).
+  * In the console, type :
+{{{
+cd sfengineBuild/
+cmake . 
+}}}
+
+  * Then compile the library using the generated Makefile
+{{{
+make
+}}}
