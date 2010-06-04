@@ -34,3 +34,46 @@ cmake .
 {{{
 make
 }}}
+
+= Your first project =
+
+Now we have our precompiled library, we create a new project :<br/>
+_*main.cpp*_
+{{{
+#include <sfengine/ScriptManager.hpp>
+
+int    main(int ac, char **av)
+{
+    eng::ScriptManager::Get()->Run("main.lua")
+    return 0;
+}
+}}}
+_*main.lua*_
+{{{
+print("LUA script launched.")
+}}}
+
+Add these include paths to your project
+
+{{{
+boost_1_41_0/
+sfengine/include
+sfengine/extlibs/luabind
+sfengine/extlibs/lua/src
+sfengine/extlibs/tinyxml/include
+sfml2/include
+}}}
+
+You have to setup the linker correctly :
+{{{
+sfengine-s
+sfml-audio-s
+sfml-network-s
+sfml-graphics-s
+sfml-window-s
+sfml-system-s
+boost-filesystem (or like this)
+boost-system
+}}}
+
+Try to compile (if failed, post an issue) and run.
