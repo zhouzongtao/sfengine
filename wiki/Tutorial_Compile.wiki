@@ -5,15 +5,15 @@
 
 sfengine use CMake cross-plateform open-source build system.
 
-First, [http://code.google.com/p/sfengine/source/checkout check-out the svn repository] to download source.
+First, [http://code.google.com/p/sfengine/source/checkout check-out the svn repository] to download source.<br/>
+Then you have to download two dependencies : [http://www.boost.org/ Boost] 1.41.0 or above, and [http://sfml.svn.sourceforge.net/viewvc/sfml/branches/sfml2.tar.gz?view=tar SFML 2.0] snapshot.
 
 == Windows ==
 
   * [http://www.cmake.org/cmake/resources/software.html Download CMake Win32 installer] and install
   * Launch cmake-gui. In the "Where is the source code" box, type the sfengine root directory.
-  * CMake have to find Boost and SFML dependencies. It uses macros to define paths :
+  * CMake have to find SFML dependency. It uses macros to define paths :
      * SFML_INCLUDEDIR / SFML_LIBRARYDIR
-     * BOOST_INCLUDEDIR / BOOST_LIBRARYDIR
     You can define them with "Add entry" button.
   * Press Configure button and choose your target compiler.
   * You now just have to go to the build directory and open your solution or project and compile it !
@@ -25,13 +25,11 @@ First, [http://code.google.com/p/sfengine/source/checkout check-out the svn repo
 sudo apt-get install cmake
 }}}
   or using [http://www.cmake.org/cmake/resources/software.html this link]
-  * Create an empty build directory (like sfengineBuild/).
-  * In the console, type :
+  * Goto your sfengine root path, and generate cmake files.
 {{{
-cd sfengineBuild/
+cd sfengine/
 cmake . 
 }}}
-
   * Then compile the library using the generated Makefile
 {{{
 make
